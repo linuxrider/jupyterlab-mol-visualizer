@@ -13,7 +13,7 @@ import VerticalSlider from './sliders';
 import SwitchLabels from './switches';
 import Inputs from './inputs';
 import Grid from '@mui/material/Grid';
-import { toArray, map } from '@lumino/algorithm';
+import { map } from '@lumino/algorithm';
 import Typography from '@mui/material/Typography';
 
 /**
@@ -59,14 +59,14 @@ export class CounterWidget extends ReactWidget {
   }
 
   getFileList(types: string[]): string[] {
-    const a = toArray(this.browserFactory?.model.items());
+    const a = [...this.browserFactory?.model.items()];
     const b = a.filter(
       item =>
         item.type === 'file' &&
         types.includes(item.name.split('.').pop() as string)
     );
     const c = map(b, x => x.name);
-    return toArray(c);
+    return [...c];
   }
 
   updateDatasource() {
